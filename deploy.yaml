@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-deployment
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: model-server
+  template:
+    metadata:
+      labels:
+        app: model-server
+    spec:
+      containers:
+      - name: container-server
+        image: model-server:default
+        env:
+        - name: MODEL_PATH
+          value: /model/model.npy
+        volumeMounts:
+        - name: model-volume
+          mountPath: /model
+      volumes:
+      - name: model-volume
+        hostPath:
+          path: /tmp
+
