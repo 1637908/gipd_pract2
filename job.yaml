@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: train
+spec:
+  template:
+    spec:
+      containers:
+      - name: container-train
+        image: model-train:default
+        # command: []
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MODEL_PATH
+          value: /model/model.npy
+        volumeMounts:
+        - name: model-volume
+          mountPath: /model
+      volumes:
+      - name: model-volume
+        hostPath:
+          path: /tmp
+      restartPolicy: Never
+  backoffLimit: 4
+
+
+
