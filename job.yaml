@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: train
+  name: model-train
 spec:
   template:
     spec:
@@ -9,11 +9,21 @@ spec:
       - name: container-train
         image: model-train:default
         # command: []
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
         - containerPort: 5000
         env:
         - name: MODEL_PATH
-          value: /model/model.npy
+          valueFrom:
+            configMapKeyRef:
+              name: model-config
+              key: path
         volumeMounts:
         - name: model-volume
           mountPath: /model
