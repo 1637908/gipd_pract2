@@ -1,0 +1,16 @@
+# Dockerfile: Use an official Python runtime as a parent image
+FROM python:3.10-slim
+
+# Set work directory 
+WORKDIR /pract2
+
+# Copy the current directory contents into the container at /pract2
+ADD requirements-server2.txt .
+ADD main-server2.py .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements-server2.txt
+
+# Run main-train.py when the container launches
+# CMD ["python", "main-server.py"]
+CMD ["flask", "--app", "main-server2", "run", "--host=0.0.0.0"]

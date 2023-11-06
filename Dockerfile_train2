@@ -1,0 +1,15 @@
+# Dockerfile: Use an official Python runtime as a parent image
+FROM python:3.10-slim
+
+# Set work directory 
+WORKDIR /pract2
+
+# Copy the current directory contents into the container at /pract2
+ADD requirements-train.txt .
+ADD main-train2.py .
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements-train.txt
+
+# Run main-train.py when the container launches
+CMD ["python", "main-train2.py"]
