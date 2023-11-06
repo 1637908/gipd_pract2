@@ -27,6 +27,11 @@ spec:
             path: /model?minutes=5
             port: 5000
             host: localhost
+        readinessProbe:
+          httpGet:
+            path: /model?minutes=5
+            port: 5000
+            host: localhost
         env:
         - name: MODEL_PATH
           valueFrom:
