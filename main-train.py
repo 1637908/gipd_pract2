@@ -17,6 +17,7 @@ train_y = y[:80]
 test_x = x[80:]
 test_y = y[80:]
 
+# mymodel = np.poly1d(np.polyfit(train_x, train_y, 4)) # original
 mymodel = np.poly1d(np.polyfit(train_x, train_y, 7)) 
 print("Model trained successfully")
 
